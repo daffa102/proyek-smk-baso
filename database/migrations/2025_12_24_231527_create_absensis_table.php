@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Opsional: Mencegah double input di hari/mapel/siswa yang sama
-            $table->unique(['siswa_id', 'mapel_id', 'date'], 'absensi_unique');
+            $table->unique(['siswa_id', 'mapel_id', 'tanggal'], 'absensi_unique');
         });
     }
 
