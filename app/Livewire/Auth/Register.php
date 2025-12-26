@@ -9,33 +9,34 @@ use Illuminate\Support\Facades\Auth;
 
 class Register extends Component
 {
-    public $email, $password, $nama, $role;
+    // Tambahkan $nip di sini
+    public $nip, $email, $password, $nama;
 
     protected $rules = [
-        'nama' => 'required|string|max:50',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:8|max:20', 
-        'role' => 'required|in:administrator,guru',
+        'nip'      => 'nullable|numeric|unique:users,nip',
+        'nama'     => 'required|string|max:50',
+        'email'    => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8|max:20',
     ];
 
     public function register()
     {
         $this->validate();
 
+       
+        dd($this->all());
+
         $user = User::create([
-            'nama' => $this->nama,
-            'email' => $this->email,
+            'nip'      => $this->nip,
+            'nama'     => $this->nama,
+            'email'    => $this->email,
             'password' => Hash::make($this->password),
-            'role' => $this->role,
+            'role'     => 'guru',
         ]);
 
         Auth::login($user);
-
         session()->regenerate();
 
-        if ($user->role === 'administrator') {
-            return redirect()->route('admin.dashboard');
-        }
 
         return redirect()->route('guru.dashboard');
     }
