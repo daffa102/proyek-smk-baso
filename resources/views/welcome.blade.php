@@ -45,8 +45,8 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button class="text-sm font-semibold text-slate-700 hover:text-blue-600 px-4 py-2 transition-all">Masuk</button>
-            <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-xl transition-all">Daftar Sekarang</button>
+            <button class="text-sm font-semibold text-slate-700 hover:text-blue-600 px-4 py-2 transition-all"><a href="{{ route('login') }}">Masuk</a></button>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-xl transition-all"><a href="{{ route('register') }}">Daftar Sekarang</a></button>
         </div>
     </nav>
 
