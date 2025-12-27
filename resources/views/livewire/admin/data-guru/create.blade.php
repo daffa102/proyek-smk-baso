@@ -1,3 +1,4 @@
 <div>
-    {{-- The whole world belongs to you. --}}
+    <h1 class="text-2xl font-black text-slate-900">Tambah Guru</h1>
+    <a href="{{ route('admin.guru.index') }}" class="text-blue-600 font-bold hover:underline ml-2">Kembali</a>
 </div>

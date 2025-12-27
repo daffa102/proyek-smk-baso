@@ -1,3 +1,4 @@
 <div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
+    <h1 class="text-2xl font-black text-slate-900">Dashboard Guru</h1>
+    <a href="{{ route('guru.profile') }}" class="text-blue-600 font-bold hover:underline">profile</a>
 </div>

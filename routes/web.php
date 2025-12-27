@@ -7,14 +7,8 @@ Route::get('/', function () {
 });
 
 //Login Register Route
-Route::get('/login', function () {
-    return view('livewire.auth.login');
-})->name('login');
-
-
-Route::get('/register', function () {
-    return view('livewire.auth.register');
-})->name('register');
+Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
+Route::get('/register', \App\Livewire\Auth\Register::class)->name('register');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', function () {

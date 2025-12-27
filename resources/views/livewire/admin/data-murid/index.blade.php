@@ -1,3 +1,4 @@
 <div>
-    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
+    <h1 class="text-2xl font-black text-slate-900">Data Murid</h1>
+    <a href="{{ route('admin.murid.create') }}" class="text-blue-600 font-bold hover:underline ml-2">Tambah Murid</a>
 </div>
