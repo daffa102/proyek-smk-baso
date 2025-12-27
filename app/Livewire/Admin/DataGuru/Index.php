@@ -2,17 +2,15 @@
 
 namespace App\Livewire\Admin\DataGuru;
 
-use Livewire\Attributes\Layout;
 use Livewire\Component;
-
 use App\Models\User;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.app')]
 class Index extends Component
 {
     use WithPagination;
-
-    #[Layout('components.layouts.app')]
 
     public $search = '';
 
