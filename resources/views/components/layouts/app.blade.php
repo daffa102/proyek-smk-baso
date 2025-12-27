@@ -21,7 +21,15 @@
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased">
 
+    <div class="flex min-h-screen">
+
+    @include('components.layouts.partials.sidebar')    
+     
+    <div class="flex-1 lg:ml-72 min-h-screen p-6 md:p-10">
     {{ $slot }}
+    </div>
+
+    </div>
 
 </body>
 </html>
