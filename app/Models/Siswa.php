@@ -11,9 +11,15 @@ class Siswa extends Model
     protected $table = 'siswas';
 
     protected $fillable = [
-        'user_id',
+        'nama',
+        'nis',
         'kelas_id',
     ];
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 
     public function absensis()
     {
