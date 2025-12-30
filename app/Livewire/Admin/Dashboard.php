@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AttendanceExport;
+use App\Exports\AttendanceMatrixExport;
 use Livewire\Attributes\Layout;
 
 class Dashboard extends Component
@@ -31,24 +31,69 @@ class Dashboard extends Component
 
     public function exportExcel()
     {
+        $this->validateFilters();
+
+        $bulan = Carbon::create($this->year, $this->month, 1)->format('Y-m');
         $filename = "Laporan-Absensi-{$this->month}-{$this->year}.xlsx";
-        return Excel::download(new AttendanceExport($this->month, $this->year, $this->kelas_id, $this->mapel_id), $filename);
+        return Excel::download(new AttendanceMatrixExport($bulan, $this->kelas_id, $this->mapel_id, '2024/2025'), $filename);
     }
 
     public function exportPdf()
     {
-        $data = $this->getReportData();
-        $pdf = Pdf::loadView('exports.attendance-pdf', [
-            'data' => $data,
-            'month' => Carbon::create()->month($this->month)->translatedFormat('F'),
-            'year' => $this->year,
+        $this->validateFilters();
+
+        $bulan_str = Carbon::create($this->year, $this->month, 1)->format('Y-m');
+        $data = $this->getMatrixData($bulan_str);
+        
+        $pdf = Pdf::loadView('exports.attendance-matrix-pdf', [
+            'data' => $data['attendance_matrix'],
+            'students' => $data['students'],
+            'days' => $data['days_in_month'],
+            'bulan' => Carbon::create($this->year, $this->month, 1)->translatedFormat('F Y'),
             'kelas' => $this->kelas_id ? Kelas::find($this->kelas_id)->nama_kelas : 'Semua Kelas',
             'mapel' => $this->mapel_id ? Mapel::find($this->mapel_id)->nama_mapel : 'Semua Mapel',
-        ]);
+            'tahun_ajaran' => '2024/2025', // Default if not filtered
+        ])->setPaper('a4', 'landscape');
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, "Laporan-Absensi-{$this->month}-{$this->year}.pdf");
+    }
+
+    protected function validateFilters()
+    {
+        $this->validate([
+            'kelas_id' => 'required',
+            'mapel_id' => 'required',
+        ], [
+            'kelas_id.required' => 'Pilih kelas terlebih dahulu untuk format matriks.',
+            'mapel_id.required' => 'Pilih mata pelajaran terlebih dahulu untuk format matriks.',
+        ]);
+    }
+
+    protected function getMatrixData($bulan)
+    {
+        $date = Carbon::parse($bulan);
+        $daysInMonth = $date->daysInMonth;
+
+        $students = Siswa::where('kelas_id', $this->kelas_id)
+            ->orderBy('nama', 'asc')
+            ->get();
+
+        $attendances = Absensi::where('kelas_id', $this->kelas_id)
+            ->where('mapel_id', $this->mapel_id)
+            ->whereMonth('tanggal', $date->month)
+            ->whereYear('tanggal', $date->year)
+            ->get()
+            ->groupBy(['siswa_id', function ($item) {
+                return Carbon::parse($item->tanggal)->format('j');
+            }]);
+
+        return [
+            'students' => $students,
+            'days_in_month' => $daysInMonth,
+            'attendance_matrix' => $attendances,
+        ];
     }
 
     public function getReportData()
@@ -69,6 +114,10 @@ class Dashboard extends Component
     {
         Carbon::setLocale('id');
         return view('livewire.admin.dashboard', [
+            'totalGuru' => \App\Models\User::where('role', 'guru')->count(),
+            'totalSiswa' => Siswa::count(),
+            'totalMapel' => Mapel::count(),
+            'totalKelas' => Kelas::count(),
             'kelases' => Kelas::all(),
             'mapels' => Mapel::all(),
             'reportData' => $this->getReportData(),
