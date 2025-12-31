@@ -11,9 +11,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
+use Livewire\Attributes\Layout;
 
 class Dashboard extends Component
 {
+    #[Layout('components.layouts.guru')]
     public $kelas_id;
     public $mapel_id;
     public $tahun_ajaran;
@@ -140,6 +142,9 @@ class Dashboard extends Component
             'daysInMonth' => $data['days_in_month'],
             'attendanceMatrix' => $data['attendance_matrix'],
             'currentMonth' => Carbon::parse($this->bulan),
+            'kelases' => $this->list_kelas,
+            'mapels' => $this->list_mapel,
+            'tahunAjaranList' => $this->list_tahun_ajaran,
         ]);
     }
 }
