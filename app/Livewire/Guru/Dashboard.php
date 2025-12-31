@@ -41,15 +41,10 @@ class Dashboard extends Component
         $this->list_kelas = Kelas::all();
         $this->list_mapel = Mapel::all();
         
-        // Example static academic years, usually would come from a model or config
-        $this->list_tahun_ajaran = [
-            '2023/2024',
-            '2024/2025',
-            '2025/2026',
-        ];
+        $this->list_tahun_ajaran = Mapel::distinct()->pluck('tahun_ajaran')->filter()->values()->toArray();
 
         $this->bulan = $this->bulan ?: date('Y-m');
-        $this->tahun_ajaran = $this->tahun_ajaran ?: '2024/2025';
+        $this->tahun_ajaran = $this->tahun_ajaran ?: ($this->list_tahun_ajaran[0] ?? '2024/2025');
     }
 
     public function showKeterangan($attendanceId)

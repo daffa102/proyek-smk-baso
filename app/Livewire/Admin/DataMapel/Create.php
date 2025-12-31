@@ -8,14 +8,16 @@ use Livewire\Component;
 class Create extends Component
 {
     public $nama_mapel = '';
+    public $tahun_ajaran = '';
 
     protected $rules = [
-        'nama_mapel' => 'required|min:2|unique:mapels,nama_mapel',
+        'nama_mapel' => 'required|min:2',
+        'tahun_ajaran' => 'required',
     ];
 
     protected $messages = [
         'nama_mapel.required' => 'Nama mapel wajib diisi',
-        'nama_mapel.unique' => 'Nama mapel sudah ada',
+        'tahun_ajaran.required' => 'Tahun ajaran wajib diisi',
     ];
 
     public function save()
@@ -25,6 +27,7 @@ class Create extends Component
         try {
             Mapel::create([
                 'nama_mapel' => $this->nama_mapel,
+                'tahun_ajaran' => $this->tahun_ajaran,
             ]);
 
             session()->flash('success', 'Data mapel berhasil ditambahkan!');

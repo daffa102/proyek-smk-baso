@@ -33,9 +33,12 @@ class Dashboard extends Component
     {
         $this->validateFilters();
 
+        $mapel = Mapel::find($this->mapel_id);
+        $tahun_ajaran = $mapel->tahun_ajaran ?? '2024/2025';
+
         $bulan = Carbon::create($this->year, $this->month, 1)->format('Y-m');
         $filename = "Laporan-Absensi-{$this->month}-{$this->year}.xlsx";
-        return Excel::download(new AttendanceMatrixExport($bulan, $this->kelas_id, $this->mapel_id, '2024/2025'), $filename);
+        return Excel::download(new AttendanceMatrixExport($bulan, $this->kelas_id, $this->mapel_id, $tahun_ajaran), $filename);
     }
 
     public function exportPdf()
@@ -52,7 +55,7 @@ class Dashboard extends Component
             'bulan' => Carbon::create($this->year, $this->month, 1)->translatedFormat('F Y'),
             'kelas' => $this->kelas_id ? Kelas::find($this->kelas_id)->nama_kelas : 'Semua Kelas',
             'mapel' => $this->mapel_id ? Mapel::find($this->mapel_id)->nama_mapel : 'Semua Mapel',
-            'tahun_ajaran' => '2024/2025', // Default if not filtered
+            'tahun_ajaran' => $this->mapel_id ? Mapel::find($this->mapel_id)->tahun_ajaran : '2024/2025',
         ])->setPaper('a4', 'landscape');
 
         return response()->streamDownload(function () use ($pdf) {
