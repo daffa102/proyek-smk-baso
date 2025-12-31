@@ -12,6 +12,7 @@ class Mapel extends Model
 
     protected $fillable = [
         'nama_mapel',
+        'tahun_ajaran',
     ];
 
     public function absensis()
