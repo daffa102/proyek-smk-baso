@@ -19,4 +19,9 @@ class Mapel extends Model
     {
         return $this->hasMany(Absensi::class);
     }
+
+    public function siswas()
+    {
+        return $this->belongsToMany(Siswa::class, 'siswa_mapel');
+    }
 }

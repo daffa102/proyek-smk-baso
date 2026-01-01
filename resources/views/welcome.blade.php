@@ -45,6 +45,7 @@
         </div>
 
         <div class="flex items-center gap-4">
+            <a href="{{ route('student.register') }}" class="text-sm font-semibold text-blue-600 hover:text-blue-700 px-4 py-2 transition-all">Daftar Siswa</a>
             <button class="text-sm font-semibold text-slate-700 hover:text-blue-600 px-4 py-2 transition-all"><a href="{{ route('login') }}">Masuk</a></button>
             <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-xl transition-all"><a href="{{ route('register') }}">Daftar Sekarang</a></button>
         </div>
@@ -72,12 +73,12 @@
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                <a href="{{ route('student.register') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 group transition-all">
+                    Daftar Siswa
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
                 <button class="bg-slate-900 hover:bg-black text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 group transition-all">
                     Coba Gratis Sekarang
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
-                </button>
-                <button class="bg-white hover:bg-slate-100 text-slate-900 border border-slate-200 px-8 py-4 rounded-2xl font-bold transition-all shadow-sm">
-                    Lihat Demo
                 </button>
             </div>
         </div>

@@ -9,6 +9,7 @@ Route::get('/', function () {
 //Login Register Route
 Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
 Route::get('/register', \App\Livewire\Auth\Register::class)->name('register');
+Route::get('/register-student', \App\Livewire\Auth\StudentRegister::class)->name('student.register');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', function () {
