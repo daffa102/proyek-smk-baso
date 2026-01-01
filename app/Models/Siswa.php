@@ -25,4 +25,9 @@ class Siswa extends Model
     {
         return $this->hasMany(Absensi::class);
     }
+
+    public function mapels()
+    {
+        return $this->belongsToMany(Mapel::class, 'siswa_mapel');
+    }
 }
