@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 //Login Register Route
 Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
