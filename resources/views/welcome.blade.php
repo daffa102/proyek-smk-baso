@@ -80,17 +80,6 @@
                     Lihat Demo
                 </button>
             </div>
-
-            {{-- <div class="flex items-center gap-6 pt-8 border-t border-slate-200">
-                <div class="flex -space-x-3">
-                    <img src="/placeholder.svg?height=40&width=40" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
-                    <img src="/placeholder.svg?height=40&width=40" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
-                    <img src="/placeholder.svg?height=40&width=40" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
-                </div>
-                <p class="text-sm text-slate-500 font-medium">
-                    Dipercaya oleh <span class="text-slate-900 font-bold">500+ Sekolah</span> di seluruh Indonesia
-                </p>
-            </div> --}}
         </div>
 
         <div class="relative">

@@ -54,6 +54,30 @@
                         <p class="text-[11px] font-black text-red-500 uppercase tracking-tight mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <!-- Tahun Ajaran -->
+                <div class="space-y-2">
+                    <label for="tahun_ajaran" class="text-sm font-black text-slate-700 uppercase tracking-wider">Tahun
+                        Ajaran</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </div>
+                        <input wire:model="tahun_ajaran" type="text" id="tahun_ajaran"
+                            class="block w-full pl-11 pr-4 py-4 bg-slate-50 border-2 border-transparent rounded-2xl text-sm font-bold placeholder:text-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all @error('tahun_ajaran') border-red-500 focus:border-red-500 focus:ring-red-500/10 @enderror"
+                            placeholder="Contoh: 2024/2025">
+                    </div>
+                    @error('tahun_ajaran')
+                        <p class="text-[11px] font-black text-red-500 uppercase tracking-tight mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
             <div class="mt-12 flex items-center justify-end gap-4">

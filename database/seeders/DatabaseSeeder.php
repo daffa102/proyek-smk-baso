@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Jalankan seeder dalam urutan yang benar
+        // 1. Kelas harus dibuat terlebih dahulu karena Siswa memiliki foreign key ke Kelas
+        // 2. Guru dan Mapel bisa dibuat dalam urutan apapun karena tidak ada dependency
+        // 3. Murid/Siswa harus dibuat setelah Kelas
+        
+        $this->call([
+            GuruSeeder::class,    // Seed guru (termasuk admin)
+            KelasSeeder::class,   // Seed kelas
+            MapelSeeder::class,   // Seed mata pelajaran
+            MuridSeeder::class,   // Seed murid/siswa (memerlukan kelas sudah ada)
         ]);
     }
 }

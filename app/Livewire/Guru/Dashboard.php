@@ -24,6 +24,9 @@ class Dashboard extends Component
 
     public $search = '';
     
+    // Attendance tracking
+    public $attendance = []; // Format: ['siswa_id' => ['status' => 'hadir', 'keterangan' => '']]
+    
     // Data list for filters
     public $list_kelas = [];
     public $list_mapel = [];
@@ -45,6 +48,70 @@ class Dashboard extends Component
 
         $this->bulan = $this->bulan ?: date('Y-m');
         $this->tahun_ajaran = $this->tahun_ajaran ?: ($this->list_tahun_ajaran[0] ?? '2024/2025');
+        
+        $this->loadTodayAttendance();
+    }
+
+    public function loadTodayAttendance()
+    {
+        if (!$this->kelas_id || !$this->mapel_id) {
+            return;
+        }
+
+        $today = now()->format('Y-m-d');
+        $existingAttendance = Absensi::where('kelas_id', $this->kelas_id)
+            ->where('mapel_id', $this->mapel_id)
+            ->whereDate('tanggal', $today)
+            ->get();
+
+        foreach ($existingAttendance as $record) {
+            $this->attendance[$record->siswa_id] = [
+                'status' => $record->status,
+                'keterangan' => $record->keterangan ?? '',
+            ];
+        }
+    }
+
+    public function updated($property)
+    {
+        // When filters change, reload attendance data
+        if (in_array($property, ['kelas_id', 'mapel_id'])) {
+            $this->attendance = [];
+            $this->loadTodayAttendance();
+        }
+    }
+
+    public function saveAttendance()
+    {
+        if (!$this->kelas_id || !$this->mapel_id) {
+            session()->flash('error', 'Pilih kelas dan mata pelajaran terlebih dahulu!');
+            return;
+        }
+
+        $today = now()->format('Y-m-d');
+        $saved = 0;
+
+        foreach ($this->attendance as $siswa_id => $data) {
+            if (!isset($data['status'])) {
+                continue;
+            }
+
+            Absensi::updateOrCreate(
+                [
+                    'siswa_id' => $siswa_id,
+                    'kelas_id' => $this->kelas_id,
+                    'mapel_id' => $this->mapel_id,
+                    'tanggal' => $today,
+                ],
+                [
+                    'status' => $data['status'],
+                    'keterangan' => $data['keterangan'] ?? null,
+                ]
+            );
+            $saved++;
+        }
+
+        session()->flash('success', "Berhasil menyimpan absensi untuk {$saved} siswa!");
     }
 
     public function showKeterangan($attendanceId)

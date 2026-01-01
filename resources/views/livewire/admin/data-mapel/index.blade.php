@@ -42,6 +42,7 @@
                 <thead>
                     <tr class="bg-slate-50/50">
                         <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Mata Pelajaran</th>
+                        <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Tahun Ajaran</th>
                         <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Dibuat Pada</th>
                         <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase text-center">Aksi</th>
                     </tr>
@@ -61,6 +62,12 @@
                                             {{ str_pad($mapel->id, 4, '0', STR_PAD_LEFT) }}</p>
                                     </div>
                                 </div>
+                            </td>
+                            <td class="px-8 py-5">
+                                <span
+                                    class="inline-flex px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-black uppercase">
+                                    {{ $mapel->tahun_ajaran ?? '-' }}
+                                </span>
                             </td>
                             <td class="px-8 py-5 text-sm font-bold text-slate-600">
                                 {{ $mapel->created_at->format('d M Y') }}
@@ -93,7 +100,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="px-8 py-10 text-center">
+                            <td colspan="4" class="px-8 py-10 text-center">
                                 <div class="flex flex-col items-center justify-center">
                                     <div
                                         class="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-4">
