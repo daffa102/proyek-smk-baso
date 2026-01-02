@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
+
 
 class Absensi extends Model
 {
@@ -33,7 +35,7 @@ class Absensi extends Model
                 'tanggal'  => $data['tanggal'] ?? now()->format('Y-m-d'),
             ],
             [
-                'guru_id'    => $data['guru_id'] ?? auth()->id(),
+                'guru_id'    => $data['guru_id'] ?? Auth::id(),
                 'kelas_id'   => $data['kelas_id'],
                 'status'     => $data['status'],
                 'keterangan' => $data['keterangan'] ?? null,
