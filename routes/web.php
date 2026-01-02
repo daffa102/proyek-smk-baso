@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,14 +14,16 @@ Route::get('/register-student', \App\Livewire\Auth\StudentRegister::class)->name
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', function () {
-        auth()->logout();
+        Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken(); 
         return redirect('/');
     })->name('logout');
 
     Route::get('/dashboard', function () {
-        if (auth()->user()->role === 'admin') {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
         return redirect()->route('guru.dashboard');
