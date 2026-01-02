@@ -22,22 +22,28 @@
     <table>
         <thead>
             <tr>
-                <th style="width: 150px;">Nama Siswa</th>
+                <th rowspan="2" style="width: 30px;">NO</th>
+                <th rowspan="2" style="width: 150px;">Nama Siswa</th>
+                <th colspan="{{ $days }}">Bulan</th>
+                <th colspan="4">Total</th>
+            </tr>
+            <tr>
                 @for ($i = 1; $i <= $days; $i++)
                     <th>{{ $i }}</th>
                 @endfor
                 <th>H</th>
-                <th>I</th>
                 <th>S</th>
+                <th>I</th>
                 <th>A</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($students as $student)
+            @foreach($students as $index => $student)
                 @php
                     $h = 0; $i_count = 0; $s = 0; $a = 0;
                 @endphp
                 <tr>
+                    <td>{{ $index + 1 }}</td>
                     <td class="student-name">{{ $student->nama }}</td>
                     @for ($d = 1; $d <= $days; $d++)
                         @php
@@ -46,8 +52,8 @@
                             if ($attendance) {
                                 switch($attendance->status) {
                                     case 'hadir': $status = 'H'; $h++; break;
-                                    case 'izin': $status = 'I'; $i_count++; break;
                                     case 'sakit': $status = 'S'; $s++; break;
+                                    case 'izin': $status = 'I'; $i_count++; break;
                                     case 'alpha': $status = 'A'; $a++; break;
                                 }
                             }
@@ -55,8 +61,8 @@
                         <td>{{ $status }}</td>
                     @endfor
                     <td>{{ $h > 0 ? $h : '' }}</td>
-                    <td>{{ $i_count > 0 ? $i_count : '' }}</td>
                     <td>{{ $s > 0 ? $s : '' }}</td>
+                    <td>{{ $i_count > 0 ? $i_count : '' }}</td>
                     <td>{{ $a > 0 ? $a : '' }}</td>
                 </tr>
             @endforeach
