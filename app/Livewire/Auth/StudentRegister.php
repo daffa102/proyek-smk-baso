@@ -11,7 +11,7 @@ use Livewire\Attributes\Layout;
 
 class StudentRegister extends Component
 {
-    #[Layout('components.layouts.app')] // Assuming app layout is used for public pages
+    #[Layout('components.layouts.auth')] // Assuming app layout is used for public pages
     public $nama;
     public $nis;
     public $kelas_id;

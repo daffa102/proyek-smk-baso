@@ -47,22 +47,6 @@
                     <p class="text-slate-500 font-bold mt-2">Kelola kehadiran siswa di setiap mata pelajaran Anda hari
                         ini.</p>
                 </div>
-                <div class="bg-white px-6 py-3 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                    <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                            <line x1="16" y1="2" x2="16" y2="6" />
-                            <line x1="8" y1="2" x2="8" y2="6" />
-                            <line x1="3" y1="10" x2="21" y2="10" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-[10px] font-black text-slate-400 uppercase">Tanggal Hari Ini</p>
-                        <p class="text-sm font-black text-slate-900">{{ now()->translatedFormat('d F Y') }}</p>
-                    </div>
-                </div>
             </header>
 
             <!-- Filter Section -->
@@ -165,10 +149,9 @@
                         <h3 class="text-xl font-black text-slate-900">Daftar Siswa</h3>
                         <p class="text-slate-400 text-sm font-bold">
                             @if ($kelas_id && $mapel_id)
-                                {{ $kelases->firstWhere('id', $kelas_id)->nama_kelas ?? '' }} -
-                                {{ $mapels->firstWhere('id', $mapel_id)->nama_mapel ?? '' }}
+                                {{ count($students) }} siswa ditemukan
                             @else
-                                Pilih kelas dan mata pelajaran untuk mulai absensi
+                                Pilih kelas dan mata pelajaran untuk melihat daftar siswa
                             @endif
                         </p>
                     </div>

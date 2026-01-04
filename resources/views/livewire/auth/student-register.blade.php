@@ -1,7 +1,9 @@
 <div class="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <div class="flex justify-center">
-            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">H</div>
+            <div
+                class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+                H</div>
         </div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
             Pendaftaran Siswa Baru
@@ -35,7 +37,9 @@
                         </label>
                         <input wire:model="nama" id="nama" type="text" placeholder="Masukkan nama sesuai ijazah"
                             class="appearance-none block w-full px-4 py-3 border border-slate-200 rounded-2xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('nama') border-red-500 @enderror">
-                        @error('nama') <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span> @enderror
+                        @error('nama')
+                            <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- NIS -->
@@ -45,7 +49,9 @@
                         </label>
                         <input wire:model="nis" id="nis" type="text" placeholder="Contoh: 12345"
                             class="appearance-none block w-full px-4 py-3 border border-slate-200 rounded-2xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('nis') border-red-500 @enderror">
-                        @error('nis') <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span> @enderror
+                        @error('nis')
+                            <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Kelas -->
@@ -56,11 +62,13 @@
                         <select wire:model="kelas_id" id="kelas_id"
                             class="block w-full px-4 py-3 border border-slate-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('kelas_id') border-red-500 @enderror">
                             <option value="">Pilih Kelas</option>
-                            @foreach($kelases as $kelas)
+                            @foreach ($kelases as $kelas)
                                 <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
                             @endforeach
                         </select>
-                        @error('kelas_id') <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span> @enderror
+                        @error('kelas_id')
+                            <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -72,11 +80,13 @@
                     <select wire:model.live="tahun_ajaran" id="tahun_ajaran"
                         class="block w-full px-4 py-3 border border-slate-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('tahun_ajaran') border-red-500 @enderror">
                         <option value="">Pilih Tahun Ajaran</option>
-                        @foreach($tahunAjaranList as $year)
+                        @foreach ($tahunAjaranList as $year)
                             <option value="{{ $year }}">{{ $year }}</option>
                         @endforeach
                     </select>
-                    @error('tahun_ajaran') <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span> @enderror
+                    @error('tahun_ajaran')
+                        <span class="text-xs text-red-600 mt-1 font-medium">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <!-- Mata Pelajaran (Multiple Select) -->
@@ -86,18 +96,20 @@
                     </label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-60 overflow-y-auto p-1 text-slate-700">
                         @forelse($mapels as $mapel)
-                            <label class="relative flex items-center p-3 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors cursor-pointer group">
+                            <label
+                                class="relative flex items-center p-3 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors cursor-pointer group">
                                 <div class="flex items-center h-5">
                                     <input wire:model="selected_mapels" value="{{ $mapel->id }}" type="checkbox"
                                         class="h-5 w-5 text-blue-600 border-slate-300 rounded-lg focus:ring-blue-500 transition-all">
                                 </div>
                                 <div class="ml-3 text-sm">
-                                    <span class="font-bold text-slate-700 group-hover:text-blue-600 transition-colors">{{ $mapel->nama_mapel }}</span>
+                                    <span
+                                        class="font-bold text-slate-700 group-hover:text-blue-600 transition-colors">{{ $mapel->nama_mapel }}</span>
                                 </div>
                             </label>
                         @empty
                             <div class="col-span-2 text-center py-6 text-slate-400">
-                                @if($tahun_ajaran)
+                                @if ($tahun_ajaran)
                                     Tidak ada mata pelajaran di tahun ajaran ini.
                                 @else
                                     Silakan pilih tahun ajaran terlebih dahulu.
@@ -105,7 +117,9 @@
                             </div>
                         @endforelse
                     </div>
-                    @error('selected_mapels') <span class="text-xs text-red-600 mt-2 block font-medium">{{ $message }}</span> @enderror
+                    @error('selected_mapels')
+                        <span class="text-xs text-red-600 mt-2 block font-medium">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <!-- Submit Button -->
@@ -114,11 +128,19 @@
                         class="w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-2xl shadow-lg text-lg font-black text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all transform hover:-translate-y-1">
                         Daftar Sebagai Siswa
                     </button>
-                    <p class="mt-4 text-center text-xs text-slate-400 font-medium">
-                        Sudah punya akun? <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Masuk di sini</a>
-                    </p>
                 </div>
             </form>
+        </div>
+        <div class="text-center mt-8">
+            <a href="/"
+                class="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="group-hover:-translate-x-1 transition-transform">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+                Kembali ke Beranda
+            </a>
         </div>
     </div>
 </div>

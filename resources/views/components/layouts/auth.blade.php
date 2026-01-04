@@ -19,6 +19,7 @@
 </head>
 
 <body class="bg-slate-50 min-h-screen relative py-12 px-6 flex justify-center">
+    
     <div class="w-full flex justify-center items-center">
         <!-- Decorative background elements -->
         <div
