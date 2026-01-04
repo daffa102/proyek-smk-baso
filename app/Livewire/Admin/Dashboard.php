@@ -116,9 +116,15 @@ class Dashboard extends Component
     public function render()
     {
         Carbon::setLocale('id');
+
+        $siswaCount = Siswa::query()
+            ->when($this->kelas_id, fn($q) => $q->where('kelas_id', $this->kelas_id))
+            ->when($this->mapel_id, fn($q) => $q->whereHas('mapels', fn($sq) => $sq->where('mapels.id', $this->mapel_id)))
+            ->count();
+
         return view('livewire.admin.dashboard', [
             'totalGuru' => \App\Models\User::where('role', 'guru')->count(),
-            'totalSiswa' => Siswa::count(),
+            'totalSiswa' => $siswaCount,
             'totalMapel' => Mapel::count(),
             'totalKelas' => Kelas::count(),
             'kelases' => Kelas::all(),

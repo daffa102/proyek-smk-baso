@@ -94,7 +94,7 @@
             <!-- Month Filter -->
             <div>
                 <label class="block text-xs font-black text-slate-400 uppercase mb-2">Bulan</label>
-                <select wire:model="month"
+                <select wire:model.live="month"
                     class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-blue-500 focus:ring-0 text-sm font-bold text-slate-700 transition-colors">
                     @foreach ($months as $m)
                         <option value="{{ $m['val'] }}">{{ $m['label'] }}</option>
@@ -105,7 +105,7 @@
             <!-- Year Filter -->
             <div>
                 <label class="block text-xs font-black text-slate-400 uppercase mb-2">Tahun</label>
-                <select wire:model="year"
+                <select wire:model.live="year"
                     class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-blue-500 focus:ring-0 text-sm font-bold text-slate-700 transition-colors">
                     @foreach ($years as $y)
                         <option value="{{ $y }}">{{ $y }}</option>
@@ -116,7 +116,7 @@
             <!-- Kelas Filter -->
             <div>
                 <label class="block text-xs font-black text-slate-400 uppercase mb-2">Kelas</label>
-                <select wire:model="kelas_id"
+                <select wire:model.live="kelas_id"
                     class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-blue-500 focus:ring-0 text-sm font-bold text-slate-700 transition-colors">
                     <option value="">Semua Kelas</option>
                     @foreach ($kelases as $kelas)
@@ -128,7 +128,7 @@
             <!-- Mapel Filter -->
             <div>
                 <label class="block text-xs font-black text-slate-400 uppercase mb-2">Mata Pelajaran</label>
-                <select wire:model="mapel_id"
+                <select wire:model.live="mapel_id"
                     class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-blue-500 focus:ring-0 text-sm font-bold text-slate-700 transition-colors">
                     <option value="">Semua Mapel</option>
                     @foreach ($mapels as $mapel)
@@ -237,7 +237,7 @@
                             <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Siswa</th>
                             <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Kelas</th>
                             <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Mapel</th>
-                            <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Waktu</th>
+
                             <th class="px-8 py-5 text-xs font-black text-slate-400 uppercase">Status</th>
                         </tr>
                     </thead>
@@ -294,9 +294,7 @@
                                     <td class="px-8 py-5 text-sm font-bold text-slate-600">
                                         {{ $absensi->mapel->nama_mapel ?? '-' }}
                                     </td>
-                                    <td class="px-8 py-5 text-sm font-bold text-slate-600">
-                                        {{ $absensi->created_at ? $absensi->created_at->format('H:i') : '-' }} WIB
-                                    </td>
+
                                     <td class="px-8 py-5">
                                         @php
                                             $statusConfig = [

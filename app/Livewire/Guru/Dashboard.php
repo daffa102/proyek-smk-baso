@@ -12,13 +12,19 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
+use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Component
 {
     #[Layout('components.layouts.guru')]
+    #[Url]
     public $kelas_id;
+    #[Url]
     public $mapel_id;
+    #[Url]
     public $tahun_ajaran;
+    #[Url]
     public $bulan;
     public $selected_attendance; // For modal keterangan
 
@@ -32,12 +38,7 @@ class Dashboard extends Component
     public $list_mapel = [];
     public $list_tahun_ajaran = [];
 
-    protected $queryString = [
-        'kelas_id' => ['except' => ''],
-        'mapel_id' => ['except' => ''],
-        'tahun_ajaran' => ['except' => ''],
-        'bulan' => ['except' => ''],
-    ];
+    // deleted protected $queryString
 
     public function mount()
     {
@@ -61,7 +62,7 @@ class Dashboard extends Component
         $today = now()->format('Y-m-d');
         $existingAttendance = Absensi::where('kelas_id', $this->kelas_id)
             ->where('mapel_id', $this->mapel_id)
-            ->where('guru_id', auth()->id())
+            ->where('guru_id', Auth::id())
             ->whereDate('tanggal', $today)
             ->get();
 
@@ -105,7 +106,7 @@ class Dashboard extends Component
                     'tanggal' => $today,
                 ],
                 [
-                    'guru_id' => auth()->id(),
+                    'guru_id' => Auth::id(),
                     'status' => $data['status'],
                     'keterangan' => $data['keterangan'] ?? null,
                 ]
