@@ -61,6 +61,7 @@ class Dashboard extends Component
         $today = now()->format('Y-m-d');
         $existingAttendance = Absensi::where('kelas_id', $this->kelas_id)
             ->where('mapel_id', $this->mapel_id)
+            ->where('guru_id', auth()->id())
             ->whereDate('tanggal', $today)
             ->get();
 
@@ -104,6 +105,7 @@ class Dashboard extends Component
                     'tanggal' => $today,
                 ],
                 [
+                    'guru_id' => auth()->id(),
                     'status' => $data['status'],
                     'keterangan' => $data['keterangan'] ?? null,
                 ]

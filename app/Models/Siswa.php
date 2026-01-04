@@ -14,6 +14,7 @@ class Siswa extends Model
         'nama',
         'nis',
         'kelas_id',
+        'user_id',
     ];
 
     public function kelas()
@@ -29,5 +30,10 @@ class Siswa extends Model
     public function mapels()
     {
         return $this->belongsToMany(Mapel::class, 'siswa_mapel');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

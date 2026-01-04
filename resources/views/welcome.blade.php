@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <link href="globals.css" rel="stylesheet">
     <style>
         /* Custom smooth scroll */
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         /* Custom utilities for clear design */
         .glass-card {
@@ -22,18 +25,29 @@
         }
 
         @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
     </style>
 </head>
+
 <body class="bg-slate-50">
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-card px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">H</div>
+            <div
+                class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                H</div>
             <span class="text-xl font-extrabold tracking-tight text-slate-900">Hadirin</span>
         </div>
 
@@ -45,39 +59,50 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <a href="{{ route('student.register') }}" class="text-sm font-semibold text-blue-600 hover:text-blue-700 px-4 py-2 transition-all">Daftar Siswa</a>
-            <button class="text-sm font-semibold text-slate-700 hover:text-blue-600 px-4 py-2 transition-all"><a href="{{ route('login') }}">Masuk</a></button>
-            <button class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-xl transition-all"><a href="{{ route('register') }}">Daftar Sekarang</a></button>
+            <button class="text-sm font-semibold text-slate-700 hover:text-blue-600 px-4 py-2 transition-all"><a
+                    href="{{ route('login') }}">Masuk</a></button>
+            <button
+                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-md hover:shadow-xl transition-all"><a
+                    href="{{ route('register.choice') }}">Daftar Sekarang</a></button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <div class="space-y-8">
-            <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+            <div
+                class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
                 <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                 </span>
                 Sistem Absensi Cerdas
             </div>
 
             <h1 class="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] text-balance">
-                Absensi Sekolah <br/>
-                <span class="text-blue-600">Lebih Cepat</span> <br/>
+                Absensi Sekolah <br />
+                <span class="text-blue-600">Lebih Cepat</span> <br />
                 & Transparan.
             </h1>
 
             <p class="text-lg text-slate-600 leading-relaxed max-w-lg">
-                Solusi digital modern untuk memantau kehadiran siswa secara real-time. Kurangi kecurangan, hemat waktu, dan permudah pelaporan bagi guru dan orang tua.
+                Solusi digital modern untuk memantau kehadiran siswa secara real-time. Kurangi kecurangan, hemat waktu,
+                dan permudah pelaporan bagi guru dan orang tua.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                <a href="{{ route('student.register') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 group transition-all">
+                <a href="{{ route('student.register') }}"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 group transition-all">
                     Daftar Siswa
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
                 </a>
-                <button class="bg-slate-900 hover:bg-black text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 group transition-all">
+                <button
+                    class="bg-slate-900 hover:bg-black text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 group transition-all">
                     Coba Gratis Sekarang
                 </button>
             </div>
@@ -85,17 +110,26 @@
 
         <div class="relative">
             <!-- Decorative elements -->
-            <div class="absolute -top-10 -right-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-            <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-700"></div>
+            <div
+                class="absolute -top-10 -right-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse">
+            </div>
+            <div
+                class="absolute -bottom-10 -left-10 w-64 h-64 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-700">
+            </div>
 
             <!-- Mockup Image -->
             <div class="relative floating bg-white p-4 rounded-[2.5rem] shadow-2xl border border-slate-100">
                 <img src="/placeholder.svg?height=600&width=400" alt="App Dashboard" class="rounded-[2rem] w-full">
 
                 <!-- Floating Info Cards -->
-                <div class="absolute -left-6 top-1/4 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 flex items-center gap-4 max-w-[200px]">
+                <div
+                    class="absolute -left-6 top-1/4 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 flex items-center gap-4 max-w-[200px]">
                     <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
                     </div>
                     <div>
                         <p class="text-[10px] text-slate-500 font-bold uppercase">Kehadiran Hari Ini</p>
@@ -103,9 +137,17 @@
                     </div>
                 </div>
 
-                <div class="absolute -right-6 bottom-1/4 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 flex items-center gap-4 max-w-[200px]">
+                <div
+                    class="absolute -right-6 bottom-1/4 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 flex items-center gap-4 max-w-[200px]">
                     <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
                     </div>
                     <div>
                         <p class="text-[10px] text-slate-500 font-bold uppercase">Siswa Terdaftar</p>
@@ -158,20 +200,29 @@
 
     <!-- Call to Action Section -->
     <section class="py-20 px-6">
-        <div class="max-w-5xl mx-auto bg-blue-600 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl">
+        <div
+            class="max-w-5xl mx-auto bg-blue-600 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl">
             <!-- Background circles -->
-            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full -translate-y-1/2 translate-x-1/3 opacity-50"></div>
-            <div class="absolute bottom-0 left-0 w-48 h-48 bg-blue-700 rounded-full translate-y-1/2 -translate-x-1/3 opacity-50"></div>
+            <div
+                class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full -translate-y-1/2 translate-x-1/3 opacity-50">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-48 h-48 bg-blue-700 rounded-full translate-y-1/2 -translate-x-1/3 opacity-50">
+            </div>
 
             <div class="relative z-10 space-y-8">
-                <h2 class="text-4xl md:text-5xl font-black text-white">Siap Digitalisasi Absensi <br/> Sekolah Anda?</h2>
-                <p class="text-blue-100 text-lg max-w-2xl mx-auto font-medium">Bergabunglah dengan ratusan sekolah lainnya yang telah meningkatkan kedisiplinan dan keamanan siswa bersama Hadirin.</p>
+                <h2 class="text-4xl md:text-5xl font-black text-white">Siap Digitalisasi Absensi <br /> Sekolah Anda?
+                </h2>
+                <p class="text-blue-100 text-lg max-w-2xl mx-auto font-medium">Bergabunglah dengan ratusan sekolah
+                    lainnya yang telah meningkatkan kedisiplinan dan keamanan siswa bersama Hadirin.</p>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                    <button class="bg-white text-blue-600 hover:bg-blue-50 px-10 py-5 rounded-2xl font-black text-lg transition-all shadow-xl hover:-translate-y-1">
+                    <button
+                        class="bg-white text-blue-600 hover:bg-blue-50 px-10 py-5 rounded-2xl font-black text-lg transition-all shadow-xl hover:-translate-y-1">
                         Mulai Gratis 30 Hari
                     </button>
-                    <button class="bg-blue-700/50 text-white border border-blue-400/30 hover:bg-blue-700 px-10 py-5 rounded-2xl font-black text-lg transition-all">
+                    <button
+                        class="bg-blue-700/50 text-white border border-blue-400/30 hover:bg-blue-700 px-10 py-5 rounded-2xl font-black text-lg transition-all">
                         Hubungi Tim Sales
                     </button>
                 </div>
@@ -186,13 +237,30 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
             <div class="space-y-6">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">H</div>
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">H
+                    </div>
                     <span class="text-xl font-black text-white">Hadirin</span>
                 </div>
-                <p class="text-sm leading-relaxed">Platform absensi sekolah pintar berbasis cloud yang memudahkan pengelolaan data kehadiran di era digital.</p>
+                <p class="text-sm leading-relaxed">Platform absensi sekolah pintar berbasis cloud yang memudahkan
+                    pengelolaan data kehadiran di era digital.</p>
                 <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
-                    <a href="#" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                    <a href="#"
+                        class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                        </svg></a>
+                    <a href="#"
+                        class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg></a>
                 </div>
             </div>
 
@@ -233,4 +301,5 @@
     </footer>
 
 </body>
+
 </html>
