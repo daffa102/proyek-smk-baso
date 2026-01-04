@@ -313,10 +313,11 @@
                                                     'text' => 'text-blue-600',
                                                     'label' => 'Sakit',
                                                 ],
-                                                'alpa' => [
-                                                    'bg' => 'bg-red-100',
-                                                    'text' => 'text-red-600',
-                                                    'label' => 'Alpa',
+                                                'alpha' => [
+                                                    'bg' => 'bg-red-50',
+                                                    'text' => 'text-red-700',
+                                                    'icon' => 'fa-times-circle',
+                                                    'label' => 'Alpha'
                                                 ],
                                             ];
                                             $status = strtolower($absensi->status ?? 'hadir');

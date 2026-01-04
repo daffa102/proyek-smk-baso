@@ -298,7 +298,7 @@
                                         </td>
                                         <td class="px-8 py-5 text-center">
                                             <input type="radio" wire:model="attendance.{{ $student->id }}.status"
-                                                value="alpa" class="w-5 h-5 accent-red-500 cursor-pointer">
+                                                value="alpha" class="w-5 h-5 accent-red-500 cursor-pointer">
                                         </td>
                                         <td class="px-8 py-5">
                                             <input type="text"
