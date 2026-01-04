@@ -54,10 +54,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/murid', \App\Livewire\Admin\DataMurid\Index::class)->name('murid.index');
         Route::get('/murid/create', \App\Livewire\Admin\DataMurid\Create::class)->name('murid.create');
         Route::get('/murid/{id}/edit', \App\Livewire\Admin\DataMurid\Edit::class)->name('murid.edit');
+
+        // Profile
+        Route::get('/profile', \App\Livewire\Admin\Profile::class)->name('profile');
     });
 
     Route::middleware(['role:guru'])->prefix('guru')->name('guru.')->group(function () {
         Route::get('/dashboard', \App\Livewire\Guru\Dashboard::class)->name('dashboard');
+        
+        // Profile
         Route::get('/profile', \App\Livewire\Guru\Profile::class)->name('profile');
     });
 });

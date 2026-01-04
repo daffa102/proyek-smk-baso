@@ -118,7 +118,7 @@
                 <label class="block text-xs font-black text-slate-400 uppercase mb-2">Kelas</label>
                 <select wire:model.live="kelas_id"
                     class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-blue-500 focus:ring-0 text-sm font-bold text-slate-700 transition-colors">
-                    <option value="">Semua Kelas</option>
+                    <option value="">Pilih Kelas</option>
                     @foreach ($kelases as $kelas)
                         <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
                     @endforeach
@@ -130,7 +130,7 @@
                 <label class="block text-xs font-black text-slate-400 uppercase mb-2">Mata Pelajaran</label>
                 <select wire:model.live="mapel_id"
                     class="w-full px-4 py-3 rounded-xl border-2 border-slate-100 focus:border-blue-500 focus:ring-0 text-sm font-bold text-slate-700 transition-colors">
-                    <option value="">Semua Mapel</option>
+                    <option value="">Pilih Mata Pelajaran</option>
                     @foreach ($mapels as $mapel)
                         <option value="{{ $mapel->id }}">{{ $mapel->nama_mapel }}</option>
                     @endforeach
@@ -212,7 +212,21 @@
         </div>
 
         <div class="overflow-x-auto">
-            @if ($reportData->isEmpty())
+            @if (!$kelas_id || !$mapel_id)
+                <!-- Filter Required State -->
+                <div class="flex flex-col items-center justify-center py-16 px-4">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="text-blue-600">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-black text-slate-700 mb-2">Pilih Filter Terlebih Dahulu</h4>
+                    <p class="text-sm font-bold text-slate-400">Silakan pilih Kelas dan Mata Pelajaran untuk melihat
+                        laporan absensi</p>
+                </div>
+            @elseif ($reportData->isEmpty())
                 <!-- Empty State -->
                 <div class="flex flex-col items-center justify-center py-16 px-4">
                     <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4">
@@ -317,7 +331,7 @@
                                                     'bg' => 'bg-red-50',
                                                     'text' => 'text-red-700',
                                                     'icon' => 'fa-times-circle',
-                                                    'label' => 'Alpha'
+                                                    'label' => 'Alpha',
                                                 ],
                                             ];
                                             $status = strtolower($absensi->status ?? 'hadir');

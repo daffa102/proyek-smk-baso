@@ -1,5 +1,10 @@
+@php
+    use Illuminate\Support\Facades\Storage;
+@endphp
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +18,12 @@
             border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
     </style>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body class="bg-slate-50 text-slate-900 font-sans antialiased">
     {{ $slot }}
 </body>
+
 </html>

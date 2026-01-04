@@ -70,7 +70,7 @@ class Dashboard extends Component
             $this->attendance[$record->siswa_id] = [
                 'status' => $record->status,
                 'keterangan' => $record->keterangan ?? '',
-            ];
+            ];  
         }
     }
 

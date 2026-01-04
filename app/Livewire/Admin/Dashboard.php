@@ -101,11 +101,16 @@ class Dashboard extends Component
 
     public function getReportData()
     {
+        // Hanya tampilkan data jika kelas dan mapel sudah dipilih
+        if (!$this->kelas_id || !$this->mapel_id) {
+            return collect();
+        }
+
         return Absensi::query()
             ->whereMonth('tanggal', $this->month)
             ->whereYear('tanggal', $this->year)
-            ->when($this->kelas_id, fn($q) => $q->where('kelas_id', $this->kelas_id))
-            ->when($this->mapel_id, fn($q) => $q->where('mapel_id', $this->mapel_id))
+            ->where('kelas_id', $this->kelas_id)
+            ->where('mapel_id', $this->mapel_id)
             ->with(['siswa', 'kelas', 'mapel'])
             ->orderBy('tanggal', 'asc')
             ->get()

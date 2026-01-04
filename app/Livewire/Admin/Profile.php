@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Livewire\Guru;
+namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\Validate;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Validate;
 
 class Profile extends Component
 {
     use WithFileUploads;
-    #[Layout('components.layouts.guru')]
 
     // User Info
     public $name;
@@ -147,8 +146,9 @@ class Profile extends Component
         $this->resetErrorBag();
     }
 
+    #[Layout('components.layouts.app')]
     public function render()
     {
-        return view('livewire.guru.profile');
+        return view('livewire.admin.profile');
     }
 }

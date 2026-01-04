@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Storage;
+@endphp
+
 <div>
 
     <body class="bg-slate-50 text-slate-900 font-sans antialiased">
@@ -17,15 +21,28 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <div class="hidden sm:flex flex-col items-end mr-2">
+                <a href="{{ route('guru.profile') }}"
+                    class="hidden sm:flex flex-col items-end mr-2 hover:opacity-80 transition-opacity">
                     <p class="text-sm font-black text-slate-900">{{ auth()->user()->name }}</p>
                     <p class="text-[10px] font-bold text-blue-600 uppercase">{{ auth()->user()->role }}</p>
-                </div>
-                <img src="/placeholder.svg?height=40&width=40" alt="Guru"
-                    class="w-10 h-10 rounded-xl object-cover ring-2 ring-blue-100">
-                <form action="{{ route('logout') }}" method="POST" class="inline-block">
+                </a>
+                <a href="{{ route('guru.profile') }}" class="group">
+                    @if (auth()->user()->foto)
+                        <img src="{{ Storage::url(auth()->user()->foto) }}" alt="{{ auth()->user()->name }}"
+                            class="w-10 h-10 rounded-xl object-cover ring-2 ring-blue-100 group-hover:ring-blue-500 transition-all">
+                    @else
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center ring-2 ring-blue-100 group-hover:ring-blue-500 transition-all">
+                            <span
+                                class="text-sm font-black text-white">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+                        </div>
+                    @endif
+                </a>
+                <form id="logout-form-guru-dashboard" action="{{ route('logout') }}" method="POST"
+                    class="inline-block">
                     @csrf
-                    <button type="submit" class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+                    <button type="button" onclick="confirmLogout('logout-form-guru-dashboard')"
+                        class="p-2 text-slate-400 hover:text-red-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                             stroke-linejoin="round">
@@ -37,6 +54,31 @@
                 </form>
             </div>
         </nav>
+
+        <script>
+            function confirmLogout(formId) {
+                Swal.fire({
+                    title: 'Konfirmasi Logout',
+                    text: 'Apakah Anda yakin ingin keluar?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ef4444',
+                    cancelButtonColor: '#64748b',
+                    confirmButtonText: 'Ya, Keluar',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true,
+                    customClass: {
+                        popup: 'rounded-3xl',
+                        confirmButton: 'rounded-xl font-bold px-6 py-3',
+                        cancelButton: 'rounded-xl font-bold px-6 py-3'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit();
+                    }
+                });
+            }
+        </script>
 
         <!-- Main Content -->
         <main class="pt-28 pb-20 px-6 max-w-7xl mx-auto">
@@ -100,8 +142,7 @@
                 <!-- Filter Tahun Ajaran -->
                 <div
                     class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 group hover:border-blue-500 transition-all">
-                    <label
-                        class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3 px-1">Tahun
+                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3 px-1">Tahun
                         Ajaran</label>
                     <div class="relative">
                         <select wire:model="tahun_ajaran"
@@ -111,9 +152,9 @@
                             @endforeach
                         </select>
                         <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                                stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path d="m6 9 6 6 6-6" />
                             </svg>
                         </div>

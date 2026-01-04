@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Storage;
+@endphp
+
 <!-- Sidebar -->
 <aside class="w-72 fixed inset-y-0 left-0 glass-sidebar z-50 hidden lg:flex flex-col p-6">
     <!-- Logo -->
@@ -72,20 +76,35 @@
 
     <!-- Bottom Profile -->
     <div class="mt-auto pt-6 border-t border-slate-100">
-        <div class="flex items-center gap-3 p-2">
-            <img src="/placeholder.svg?height=40&width=40" alt="Admin"
-                class="w-10 h-10 rounded-xl object-cover ring-2 ring-slate-100">
+        <a href="{{ route('admin.profile') }}"
+            class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-100 transition-all group">
+            @if (auth()->user()->foto)
+                <img src="{{ Storage::url(auth()->user()->foto) }}" alt="{{ auth()->user()->name }}"
+                    class="w-10 h-10 rounded-xl object-cover ring-2 ring-slate-100 group-hover:ring-blue-500 transition-all">
+            @else
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center ring-2 ring-slate-100 group-hover:ring-blue-500 transition-all">
+                    <span
+                        class="text-sm font-black text-white">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+                </div>
+            @endif
             <div class="flex-1 overflow-hidden">
                 <p class="text-sm font-black text-slate-900 truncate">{{ auth()->user()->name }}</p>
                 <p class="text-xs font-bold text-slate-400 truncate">{{ auth()->user()->email }}</p>
             </div>
-        </div>
-        <form action="{{ route('logout') }}" method="POST" class="w-full mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                class="text-slate-400 group-hover:text-blue-600 transition-colors">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </a>
+        <form id="logout-form-admin" action="{{ route('logout') }}" method="POST" class="w-full mt-4">
             @csrf
-            <button type="submit"
+            <button type="button" onclick="confirmLogout('logout-form-admin')"
                 class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-red-500 hover:bg-red-50 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                     <polyline points="16 17 21 12 16 7" />
                     <line x1="21" y1="12" x2="9" y2="12" />
@@ -94,4 +113,29 @@
             </button>
         </form>
     </div>
+
+    <script>
+        function confirmLogout(formId) {
+            Swal.fire({
+                title: 'Konfirmasi Logout',
+                text: 'Apakah Anda yakin ingin keluar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'Ya, Keluar',
+                cancelButtonText: 'Batal',
+                reverseButtons: true,
+                customClass: {
+                    popup: 'rounded-3xl',
+                    confirmButton: 'rounded-xl font-bold px-6 py-3',
+                    cancelButton: 'rounded-xl font-bold px-6 py-3'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
 </aside>

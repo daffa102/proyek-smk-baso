@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,24 +13,29 @@
             color: white;
             box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
         }
+
         .glass-sidebar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-right: 1px solid rgba(226, 232, 240, 0.8);
         }
     </style>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body class="bg-slate-50 text-slate-900 font-sans antialiased">
 
     <div class="flex min-h-screen">
 
-    @include('components.layouts.partials.sidebar')    
-     
-    <div class="flex-1 lg:ml-72 min-h-screen p-6 md:p-10">
-    {{ $slot }}
-    </div>
+        @include('components.layouts.partials.sidebar')
+
+        <div class="flex-1 lg:ml-72 min-h-screen p-6 md:p-10">
+            {{ $slot }}
+        </div>
 
     </div>
 
 </body>
+
 </html>
