@@ -6,6 +6,7 @@
     <title>Dashboard Admin - Hadirin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="globals.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .sidebar-item-active {
             background-color: #3b82f6;
@@ -29,7 +30,33 @@
     {{ $slot }}
     </div>
 
-    </div>
+    <script>
+        window.addEventListener('swal:success', event => {
+            const data = Array.isArray(event.detail) ? event.detail[0] : event.detail;
+            Swal.fire({
+                title: data.title,
+                text: data.text,
+                icon: 'success',
+                confirmButtonText: 'Oke',
+                confirmButtonColor: '#3b82f6',
+            });
+        });
 
+        window.addEventListener('swal:error', event => {
+            const data = Array.isArray(event.detail) ? event.detail[0] : event.detail;
+            Swal.fire({
+                title: data.title,
+                text: data.text,
+                icon: 'error',
+                confirmButtonText: 'Tutup',
+                confirmButtonColor: '#ef4444',
+            });
+        });
+
+        window.addEventListener('close-modal', event => {
+            // This is handled by Alpine.js in my x-modal component,
+            // but we ensure Livewire dispatch is correctly received.
+        });
+    </script>
 </body>
 </html>
