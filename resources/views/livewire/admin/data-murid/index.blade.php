@@ -7,6 +7,16 @@
         </div>
 
         <div class="flex items-center gap-3">
+            <button x-on:click="$dispatch('open-modal', 'import-modal')"
+                class="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg shadow-emerald-500/20 flex items-center gap-2 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                Import Excel
+            </button>
             <a href="{{ route('admin.murid.create') }}"
                 class="bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg shadow-blue-500/20 flex items-center gap-2 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -128,4 +138,54 @@
             </div>
         @endif
     </div>
+
+    <!-- Import Modal -->
+    <x-modal name="import-modal" title="Import Data Murid">
+        <div class="p-8">
+            <form wire:submit.prevent="import">
+                <div class="mb-6">
+                    <label class="block text-sm font-black text-slate-700 mb-2">Pilih File Excel</label>
+                    <div class="relative">
+                        <input type="file" wire:model="file"
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-2xl file:border-0 file:text-sm file:font-black file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all border-2 border-dashed border-slate-200 rounded-2xl p-4">
+                    </div>
+                    @error('file') <span class="text-red-500 text-xs font-bold mt-2 inline-block">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="bg-blue-50 rounded-2xl p-6 mb-8">
+                    <h4 class="text-blue-800 font-black text-sm mb-2 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        Petunjuk Import:
+                    </h4>
+                    <ul class="text-blue-700/80 text-xs font-bold space-y-2">
+                        <li>• File harus berformat .xlsx atau .xls</li>
+                        <li>• Baris pertama harus berisi header: <code class="bg-blue-100 px-1.5 py-0.5 rounded text-blue-800">nama</code>, <code class="bg-blue-100 px-1.5 py-0.5 rounded text-blue-800">nis</code>, <code class="bg-blue-100 px-1.5 py-0.5 rounded text-blue-800">kelas</code></li>
+                        <li>• Kolom <code class="bg-blue-100 px-1.5 py-0.5 rounded text-blue-800">kelas</code> harus sesuai dengan nama kelas yang ada di sistem (contoh: X RPL 1)</li>
+                        <li>• Pastikan NIS belum terdaftar di sistem</li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-blue-100 flex items-center justify-between">
+                        <span class="text-blue-800 text-[10px] font-black uppercase">Butuh bantuan format?</span>
+                        <button type="button" wire:click="downloadTemplate" class="text-blue-600 hover:text-blue-800 text-xs font-black flex items-center gap-1 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download Template Excel
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3">
+                    <button type="button" x-on:click="$dispatch('close-modal', 'import-modal')"
+                        class="px-6 py-3 rounded-2xl font-black text-slate-600 hover:bg-slate-100 transition-all">
+                        Batal
+                    </button>
+                    <button type="submit" wire:loading.attr="disabled"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-black px-8 py-3 rounded-2xl shadow-lg shadow-blue-500/20 transition-all disabled:opacity-50">
+                        <span wire:loading.remove>Mulai Import</span>
+                        <span wire:loading>Memproses...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </x-modal>
 </div>
